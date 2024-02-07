@@ -12,7 +12,7 @@ function App() {
   return (
     <div>
       <AppBar />
-      <div className="px-4">
+      <div className="container-fluid">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/add" element={<Add />} />
