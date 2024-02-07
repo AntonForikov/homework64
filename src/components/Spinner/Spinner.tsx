@@ -2,8 +2,7 @@ import React from 'react';
 
 const Spinner: React.FC = () => {
   return (
-    <div className="spinner-border text-primary" role="status">
-      <span className="visually-hidden">Loading...</span>
+    <div className="spinner-border text-primary d-block m-auto mt-3" role="status">
     </div>
   );
 };

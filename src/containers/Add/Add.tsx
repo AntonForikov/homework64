@@ -2,8 +2,11 @@ import React, {useState} from 'react';
 import {Post} from '../../types.d.';
 import Spinner from '../../components/Spinner/Spinner';
 import axiosAPI from '../../axiosAPI';
+import {useNavigate} from 'react-router-dom';
 
 const Add: React.FC = () => {
+  const navigate = useNavigate();
+
   const [loading, setLoading] = useState(false);
   const [post, setPost] = useState<Post>({
     post: '',
@@ -25,12 +28,14 @@ const Add: React.FC = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      await axiosAPI.post('/posts.json', post)
+      await axiosAPI.post('/posts.json', post);
     } catch {
       alert ('Please check URL.');
     } finally {
       setLoading(false);
     }
+    setPost(prevState => ({...prevState, post: '', date: ''}))
+    navigate('/');
   };
 
   return (<>
