@@ -3,19 +3,22 @@ import {NavLink} from 'react-router-dom';
 
 const AppBar: React.FC = () => {
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-primary px-3">
+    <nav className="navbar navbar-expand-lg navbar-dark bg-primary px-3">
       <div className="container-md">
         <NavLink className="navbar-brand" to="/">Navbar</NavLink>
       </div>
       <ul className="navbar-nav me-auto mb-2 mb-lg-0">
         <li className="nav-item">
-          <a className="nav-link active" aria-current="page" href="#">Home</a>
+          <NavLink className="nav-link" to="/">Home</NavLink>
         </li>
         <li className="nav-item">
-          <a className="nav-link" href="#">Features</a>
+          <NavLink className="nav-link" to="/add">Add</NavLink>
         </li>
         <li className="nav-item">
-          <a className="nav-link" href="#">Pricing</a>
+          <NavLink className="nav-link" to="/about">About</NavLink>
+        </li>
+        <li className="nav-item">
+          <NavLink className="nav-link" to="/contacts">Contacts</NavLink>
         </li>
       </ul>
     </nav>
