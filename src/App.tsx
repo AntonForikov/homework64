@@ -14,6 +14,7 @@ function App() {
       <div className="container-fluid">
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/posts" element={<Home />} />
           <Route path="/add" element={<Add edit={false} />} />
           <Route path="/posts/:id" element={<Post/>} >
             <Route path="edit" element={<Add edit={true} />}/>

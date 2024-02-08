@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {PostApi} from '../../types.d.';
 import Spinner from '../../components/Spinner/Spinner';
 import axiosAPI from '../../axiosAPI';
@@ -29,6 +29,19 @@ const Add: React.FC<Props> = ({edit}) => {
     }));
   };
 
+  if (edit) {
+    const setCurrentPost = useCallback(async  () => {
+        const currentPost = await axiosAPI.get<PostApi | null>(`/posts/${params.id}.json`);
+        if (currentPost.data) {
+          setPost(currentPost.data);
+        }
+      }, [])
+
+    useEffect(() => {
+      void setCurrentPost()
+    }, [setCurrentPost]);
+  }
+
   const onFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
@@ -44,7 +57,7 @@ const Add: React.FC<Props> = ({edit}) => {
       setLoading(false);
     }
     setPost(prevState => ({...prevState, post: '', date: ''}));
-    navigate('/');
+    navigate('/')
   };
 
   return (<>
