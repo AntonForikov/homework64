@@ -1,5 +1,5 @@
 import React, {useCallback, useEffect, useState} from 'react';
-import {Link, Outlet, useParams} from 'react-router-dom';
+import {Link, Outlet, useNavigate, useParams} from 'react-router-dom';
 import axiosAPI from '../../axiosAPI';
 import {PostApi} from '../../types.d.';
 import Spinner from '../../components/Spinner/Spinner';
@@ -7,6 +7,8 @@ import {format} from 'date-fns';
 
 const Post: React.FC = () => {
   const params = useParams();
+  const navigate = useNavigate();
+
   const [post, setPost] = useState<PostApi | null>();
   const [isLoading, setIsLoading] = useState(false);
 
@@ -23,6 +25,7 @@ const Post: React.FC = () => {
 
   const deletePost = async () => {
     await axiosAPI.delete('/posts/' + params.id + '.json');
+    navigate('/');
   };
 
   return (
@@ -36,13 +39,12 @@ const Post: React.FC = () => {
                 <h1>{post.title}</h1>
                 <h4>{post.description}</h4>
                 <Link className="btn btn-success me-2" to={`/posts/${params.id}/edit`}>Edit</Link>
-                <Link
+                <button
                   className={"btn btn-danger"}
                   onClick={deletePost}
-                  to={'/'}
                 >
                   Delete
-                </Link>
+                </button>
               </div>
             </div>
             <Outlet/>
