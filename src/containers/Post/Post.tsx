@@ -30,7 +30,7 @@ const Post: React.FC = () => {
       {isLoading ? <Spinner/> :
         post && !isLoading ?
           <>
-            <div className="card mt-3">
+            <div className="card mt-3 text-center">
               <div className="card-body">
                 <span className="text-secondary fs-6">Created at: {format(post.date, "dd.MM.yy HH.mm")}</span>
                 <h1>{post.title}</h1>
