@@ -15,7 +15,7 @@ const Home: React.FC = () => {
       const postsApi = response.data;
 
       if (!postsApi) {
-        alert("This endpoint is empty.")
+        alert("This endpoint is empty.");
       }
 
       if (postsApi) {
