@@ -35,10 +35,10 @@ const Add: React.FC<Props> = ({edit}) => {
         if (currentPost.data) {
           setPost(currentPost.data);
         }
-      }, [])
+      }, [params.id]);
 
     useEffect(() => {
-      void setCurrentPost()
+      void setCurrentPost();
     }, [setCurrentPost]);
   }
 
@@ -57,7 +57,7 @@ const Add: React.FC<Props> = ({edit}) => {
       setLoading(false);
     }
     setPost(prevState => ({...prevState, post: '', date: ''}));
-    navigate('/')
+    navigate('/');
   };
 
   return (<>
