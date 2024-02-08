@@ -23,7 +23,7 @@ const Post: React.FC = () => {
 
   const deletePost = async () => {
     await axiosAPI.delete('/posts/' + params.id + '.json');
-  }
+  };
 
   return (
     <>

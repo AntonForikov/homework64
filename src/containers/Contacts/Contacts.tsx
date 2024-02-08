@@ -21,10 +21,10 @@ const Contacts: React.FC = () => {
     } finally {
       setIsLoading(false);
     }
-  }, [])
+  }, []);
 
   useEffect(() => {
-    void getContacts()
+    void getContacts();
   }, [getContacts]);
 
 

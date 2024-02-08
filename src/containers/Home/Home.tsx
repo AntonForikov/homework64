@@ -27,7 +27,7 @@ const Home: React.FC = () => {
         setPosts([]);
       }
     } catch {
-      alert ('Please check requested URL.')
+      alert ('Please check requested URL.');
     } finally {
       setIsLoading(false);
     }

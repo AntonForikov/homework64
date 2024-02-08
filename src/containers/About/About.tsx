@@ -21,10 +21,10 @@ const About: React.FC = () => {
     } finally {
       setIsLoading(false);
     }
-  }, [])
+  }, []);
 
   useEffect(() => {
-    void getAbout()
+    void getAbout();
   }, [getAbout]);
 
 

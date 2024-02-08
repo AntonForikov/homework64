@@ -36,7 +36,7 @@ const Add: React.FC<Props> = ({edit}) => {
       if (!edit) {
         await axiosAPI.post('/posts.json', post);
       } else if (edit) {
-        await axiosAPI.put('/posts/' + params.id + '.json', post)
+        await axiosAPI.put('/posts/' + params.id + '.json', post);
       }
     } catch {
       alert ('Please check URL.');
