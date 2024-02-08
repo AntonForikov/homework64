@@ -21,6 +21,10 @@ const Post: React.FC = () => {
     void getPost();
   }, [getPost]);
 
+  const deletePost = async () => {
+    await axiosAPI.delete('/posts/' + params.id + '.json');
+  }
+
   return (
     <>
       {isLoading ? <Spinner/> :
@@ -31,8 +35,14 @@ const Post: React.FC = () => {
                 <span className="text-secondary fs-6">Created at: {format(post.date, "dd.MM.yy HH.mm")}</span>
                 <h1>{post.title}</h1>
                 <h4>{post.description}</h4>
-                <Link className="btn btn-success" to={`/posts/${params.id}/edit`}>Edit</Link>
-                <button className={"btn btn-danger"}>Delete</button>
+                <Link className="btn btn-success me-2" to={`/posts/${params.id}/edit`}>Edit</Link>
+                <Link
+                  className={"btn btn-danger"}
+                  onClick={deletePost}
+                  to={'/'}
+                >
+                  Delete
+                </Link>
               </div>
             </div>
             <Outlet/>

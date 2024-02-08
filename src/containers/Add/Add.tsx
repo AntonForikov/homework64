@@ -2,9 +2,14 @@ import React, {useState} from 'react';
 import {PostApi} from '../../types.d.';
 import Spinner from '../../components/Spinner/Spinner';
 import axiosAPI from '../../axiosAPI';
-import {useNavigate} from 'react-router-dom';
+import {useNavigate, useParams} from 'react-router-dom';
 
-const Add: React.FC = () => {
+interface Props {
+  edit: boolean
+}
+
+const Add: React.FC<Props> = ({edit}) => {
+  const params = useParams();
   const navigate = useNavigate();
 
   const [loading, setLoading] = useState(false);
@@ -28,8 +33,11 @@ const Add: React.FC = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      await axiosAPI.post('/posts.json', post);
-      console.log("new post:", post);
+      if (!edit) {
+        await axiosAPI.post('/posts.json', post);
+      } else if (edit) {
+        await axiosAPI.put('/posts/' + params.id + '.json', post)
+      }
     } catch {
       alert ('Please check URL.');
     } finally {
@@ -44,7 +52,7 @@ const Add: React.FC = () => {
       loading ? <Spinner/> :
         <form className="mt-2" onSubmit={onFormSubmit}>
           <div className="d-flex align-items-center">
-            <label htmlFor="title">Title: </label>
+            <label htmlFor="title">{edit ? 'New Title:' : 'Title:'} </label>
             <input
               type="text"
               className="form-control mx-3"
@@ -57,7 +65,7 @@ const Add: React.FC = () => {
             />
           </div>
           <div className="d-flex flex-column align-items-center mt-3">
-            <label htmlFor="description">Post</label>
+            <label htmlFor="description">{edit ? 'New Post:' : 'Post:'}</label>
             <textarea
               className="form-control my-3"
               id="description"
@@ -67,7 +75,7 @@ const Add: React.FC = () => {
               onChange={postChange}
               required
             />
-            <button type="submit" className="btn btn-primary">Add</button>
+            <button type="submit" className="btn btn-primary">{edit ? 'Edit' : 'Add post'}</button>
           </div>
         </form>
     }

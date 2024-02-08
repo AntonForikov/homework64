@@ -10,19 +10,28 @@ const Home: React.FC = () => {
   const [posts, setPosts] = useState<Post[]>([]);
 
   const getData = useCallback(async () => {
-    const response = await axiosAPI.get<PostsAPI | null>('/posts.json');
-    const postsApi = response.data;
+    try {
+      const response = await axiosAPI.get<PostsAPI | null>('/posts.json');
+      const postsApi = response.data;
 
-    if (postsApi) {
-      setPosts(Object.keys(postsApi).map(id => ({
-        ...postsApi[id],
-        id
-      })));
-    } else {
-      setPosts([]);
+      if (!postsApi) {
+        alert("This endpoint is empty.")
+      }
+
+      if (postsApi) {
+        setPosts(Object.keys(postsApi).map(id => ({
+          ...postsApi[id],
+          id
+        })).reverse());
+      } else {
+        setPosts([]);
+      }
+    } catch {
+      alert ('Please check requested URL.')
+    } finally {
+      setIsLoading(false);
     }
-    setIsLoading(false);
-  }, []);
+    }, []);
 
   useEffect(() => {
     void getData();
